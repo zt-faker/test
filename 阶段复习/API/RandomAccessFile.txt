@@ -1,0 +1,47 @@
+java.io.RandomAccessFile
+RAF是专门用来读写文件数据的类，其基于指针对文集数据进行随机读写
+	常用构造器：
+	RandomAccessFile（String path，String mode）
+	RandomAccessFile（File file,String mode）
+	mode为操作权限
+	r:只读模式
+	rw：读写模式
+ 
+1.void write(int n)
+	向文件中写入一个字节，写入的是给定的int值对应的2进制的低八位
+				 vvvvvvvv
+	00000000 00000000 00000000 00000001
+   void writeInt(int d)
+	将给定的int值一次性写出，内部会连续写4个字节
+	
+2.int read( )
+	从文件提取1字节，并以int类型值返回，同样返回对应的2进制低八位
+	若返回值为-1，则表示到了文件末尾
+   int readInt()
+	连续读取4个字节将其还原为int值
+	readLong，readDouble，readFloat
+
+3.getFilePointer（）
+	获取当前RAF的指针位置，创建RAF指针默认从0开始
+4.void seek()
+	移动指针到指定位置
+5.byte[] getBytes(String csn)
+	将当前字符串按照指定的字符集转换为字节
+   byte[] getBytes(）
+	将当前字符串按照默认的字符集转换为字节
+6.String (byte[]data,String csn)
+	将字节数字按照指定的字符集还原为字符串
+7.int read(byte[] data)
+	一次性读取给定字节数组总长度的字节量存入该数组中
+	若返回值为-1，则表示读到文件末尾
+8.void write(byte[] data)；void write(byte[]data,int i ,int len)
+	一次性将给定字节数组中所有字节写出
+	将给定数组从下标i处到len处的字节一次写出
+
+
+
+
+
+
+
+

@@ -1,0 +1,112 @@
+#集合	集合只能存放引用数据类型
+java.util.Collection
+Collection是所有集合实现类的顶级接口，
+里面规定了所有集合都必须具备的基础操作元素。
+
+Collection下面有两个常用的子接口：
+	java.util.List:线性表，是一类可以存放重复元素且有序的集合，
+			可以通过下标操作元素。
+	常用实现类：ArrayList：内部由数组实现，查询效率高，增删效率低
+		    LinkedList：内部由链表实现，增删快，尤其是首位元素，查询慢
+		在性能要求不是非常苛刻的前提下，通常使用ArrayList。
+			E get(int i)；获取下标对应的元素
+			E set(int index,E e)；将给定元素设置到指定位置,
+				返回值为原位置对应的元素(替换元素操作)
+			void add(int index,E e)；将给定元素插入到指定位置
+			E remove(int i)；删除指定位置对应的元素并将其返回
+			List subList(int start,int end)；获取指定范围内的子集
+	java.util.Set:不可重复集合，大部分的实现类都是无序的，
+			元素是否重复用元素本身equals比较的结果而定。
+		常用实现类：HashSet
+#集合重写了toString方法，转换为字符串
+并且集合重每个元素输出的内容就是自身元素toString的内容
+
+        Collection c=new ArrayList();//向上造型
+	c.add("one");//添加元素
+	c.size();//获取元素个数
+	c.isEmpty();//判断当前集合是否为空集合
+	c.clear();//清空集合
+	c.contains(Object o);//判断当前集合是否包含给定元素，equals
+	c.remove(Object o);//从集合中删除元素，如果多个元素相同删第一个，equals
+	c.addAll(Collection c);//将指定元素添加到当前集合，集合发生变化返回ture
+	c.containsAll(Collection c);//判断当前集合是否包含给定集合的所有元素
+	c.removeAll();//删除当前集合与给定集合重合的部分
+#集合遍历
+Collection提供了统一的遍历方法：迭代器模式
+java.util.iterator接口
+迭代器接口：规定了迭代器实现类遍历集合的操作，问->取->删
+	    其中删除不是必须的操作
+	Iterator iterator()；该方法或获取一个遍历当前集合的迭代器
+	boolean hasNext();判断是否还有元素可以遍历
+	E next();遍历集合下一个元素
+	迭代有一个要求：
+	再使用迭代器遍历集合的过程中不得使用集合自身的方法增删元素
+	否则遍历过程中会抛出异常
+	迭代器的remove方法不需要传入参数，删除的本次迭代时通过next获取的元素
+
+泛型是JDK5之后推出的又一特性，也称为参数化类型，
+是允许我们再使用一个类时指定其实现定义的
+某个属性或方法的参数或返回值的类型，使用更灵活
+泛型应用最广的地方就是集合，用来再使用集合时指定其元素的类型
+ 	Collection<String>c=new ArrayList<>();
+
+
+
+集合转换为数组
+Collection提供了 toArray（）方法
+数组转换为集合
+Arrays提供了一个静态方法asList（）方法
+
+集合排序
+集合的工具类：java.util.Collections
+	其提供了很多静态方法，便于我们操作集合
+	其中有一个方法为sort，可以对list集合进行自然排序
+Collections的方法在排序集合时要求集合必须实现Comparable接口，否则编译错误
+	为了让代码没有侵入性，我们使用匿名内部类来做参数
+	Collections.sort(list,new Comparator<Point>() {
+		public int compare(Point o1, Point o2) {
+			int olen1=o1.getX()*o1.getX()+o1.getY()*o1.getY();
+			int olen2=o2.getX()*o2.getX()+o2.getY()*o2.getY();
+			return olen1-olen2;
+		}
+	});
+队列
+java.util.Queue 队列接口
+Queue继承自Collection
+队列是经典的数据结构之一，可以存放一组元素，但是存取元素遵循先进先出
+常用实现类：LinkedList
+	Queue<String>q=new LinkedList<>();
+	q.offer();//入队操作，元素追加到队列末尾
+	q.size();//集合长度
+	q.poll();//出队操作，获取队首元素从队列中删除
+	q.peek();//引用队首元素，获取元素依旧再队列中
+遍历队列元素，使用迭代器遍历不会影响队列中的元素，遍历后对列不变
+使用poll方法遍历队列，最后会得到一个空队列
+
+java.util.Deque 接口：双端队列
+Deque接口继承自Queue接口，两端都可以出入队的队列
+实现类同样是：LinkedList
+	Deque<String>d=new LinkedList<>();
+	d.offerFirst("");//从前面入队
+	d.offerLast("");//从后面入队
+
+栈结构
+栈是一种经典的数据结构之一，可以保存一组元素，存取元素遵循先进后出原则
+通常我们可以使用栈实现"后退"这样的功能
+	push();写入数据
+	pop();取出最后进入的那个数据
+
+
+
+
+
+
+
+
+
+
+
+	d.pollFiest();//前出
+	d.pollLast();//后出
+
+

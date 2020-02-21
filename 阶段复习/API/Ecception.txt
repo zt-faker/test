@@ -1,0 +1,35 @@
+Throwable是所有异常的超类
+	Error(编译时异常)
+	Exception(运行时异常)->RunTimeException
+	抛出的异常若不是RunTimeException或其子类，
+	必须在throws方法上声明该异常的抛出，否则编译不通过
+java中有一种异常处理机制try -catch
+	语法： try{
+	       代码块//
+	}catch(xxxException e){
+	       程序出现xxxException异常的处理手段
+	}
+1.throw：在方法中使用，抛出满足语法但是不满足业务逻辑或者
+	不应当在该代码块应该处理的异常对象，由调用者处理
+	throw new XXXException();
+2.throws: 在方法上声明可能会有一个异常并抛出
+	在方法名后面接 throws <异常>{ }
+throws可以单独调用，throw必须在throws在方法上声明了才可以在方法内使用
+
+Finally是异常处理机制的最后一块：
+	可以直接跟在try后面或者最后一个catch后面
+	finally可以保证代码只要执行到try中，
+	无论是否出现异常finally都会执行
+JDk7之后推出一个特性：autocloseable
+		      可以用更简短的代码完成异常处理中IO操作的关闭
+		      但是只有实现了autpcloseable接口的类才可以
+	* 只有实现了AutoCloseable接口的类才可以定义在这里
+	* java IO中的流还有RandomAccessFile都实现了,因此都可以在这里定义
+	* 
+	* 该特性是编译期认可的而不是虚拟机,
+	* 编译器会在编译期将这里定义的内容改为在finally中关闭
+	try (FileOutputStream fos=new FileOutputStream("fos.dat")){
+		fos.write(1);
+	} catch (Exception e) {
+		System.out.println("出错了");
+	}

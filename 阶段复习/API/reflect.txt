@@ -1,0 +1,37 @@
+#java反射机制
+  反射是一种动态机制，允许我们在代码允许期间来决定实例化对象，
+调用方法，操作属性等
+  反射可以提高代码的灵活度，但是会降低执行效率
+  反射应当在程序中起到画龙点睛的作用，不能过度依赖反射
+
+Class类称为类对象
+Class类的每一个实例用于每个加载的类只有一个Class实例与之对应，
+我们通过类的对象可以获取其表示的类的一切信息(类名，方法，属性等)
+因此反射离不开这个类，使用反射第一步就是获取一个类的类对象，
+获取方式由3种：
+	1.类名.class
+	每个类都可以用这种方式获取类对象，简单明了但不灵活
+	例如：
+		Class c=String.class;获取String的类对象
+		Class c=int.calss;获取int的类对象
+		Class c=Object.class;
+	2.Class.forName(String name)
+		Class提供了一个静态方法forName，
+		可以传入要加载的类的完全限定名(包名.类名)来获取类对象
+		Class c=Class.forName("java.lang.String");
+	3.类加载器ClassLoader形式
+
+.getName();//获取类名
+
+Method[]methods=c.getDeclaredMethods();//获取全部方法
+
+
+
+
+
+
+
+
+
+
+
